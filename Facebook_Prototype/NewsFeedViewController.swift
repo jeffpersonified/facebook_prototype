@@ -8,12 +8,13 @@
 
 import UIKit
 
-class NewsFeedViewController: UIViewController {
+class NewsFeedViewController: UIViewController, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate {
 
     // Set local outlets and variables
     @IBOutlet weak var newsFeedScrollView: UIScrollView!
     @IBOutlet weak var newsFeedImageView: UIImageView!
-
+    
+    var isPresenting: Bool = true
     var onTapPhoto: UIImageView!
     
     override func viewDidLoad() {
@@ -27,6 +28,8 @@ class NewsFeedViewController: UIViewController {
     
     override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!) {
         var destinationViewController = segue.destinationViewController as PhotoViewController
+        destinationViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+        destinationViewController.transitioningDelegate = self
         
         destinationViewController.photo = self.onTapPhoto.image
 
@@ -38,4 +41,33 @@ class NewsFeedViewController: UIViewController {
     }
 
     
+    func animationControllerForPresentedController(presented: UIViewController!, presentingController presenting: UIViewController!, sourceController source: UIViewController!) -> UIViewControllerAnimatedTransitioning! {
+        isPresenting = true
+        return self
+    }
+    
+    func animationControllerForDismissedController(dismissed: UIViewController!) -> UIViewControllerAnimatedTransitioning! {
+        isPresenting = false
+        return self
+    }
+    
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+        // The value here should be the duration of the animations scheduled in the animationTransition method
+        return 0.4
+    }
+    
+    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+        println("animating transition")
+        var containerView = transitionContext.containerView()
+        var toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
+        var fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
+        
+        if (isPresenting) {
+            println("presenting")
+        } else {
+            println("not presenting")
+        }
+        // TODO: animate the transition in Step 3 below
+    }
+
 }

@@ -97,14 +97,6 @@
                                             <outletCollection property="gestureRecognizers" destination="CXf-ab-WE0" appends="YES" id="WWg-pn-DGs"/>
                                         </connections>
                                     </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="wedding2" id="t84-nA-PGX" userLabel="toss">
-                                        <rect key="frame" x="4" y="242" width="154" height="154"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <gestureRecognizers/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="JaQ-fK-zwv" appends="YES" id="TNr-q1-7kf"/>
-                                        </connections>
-                                    </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="wedding5" id="Aqa-6F-fIz" userLabel="cake">
                                         <rect key="frame" x="162" y="293" width="154" height="102"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -127,6 +119,14 @@
                                         <gestureRecognizers/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="f3H-xu-in7" appends="YES" id="LUG-nV-4kV"/>
+                                        </connections>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="wedding2" id="t84-nA-PGX" userLabel="toss">
+                                        <rect key="frame" x="4" y="241" width="154" height="154"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="JaQ-fK-zwv" appends="YES" id="TNr-q1-7kf"/>
                                         </connections>
                                     </imageView>
                                 </subviews>
