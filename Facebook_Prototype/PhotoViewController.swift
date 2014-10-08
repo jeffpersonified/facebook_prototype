@@ -17,8 +17,8 @@ class PhotoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor.blackColor()
         photoImageView.image = photo
-    
     }
  
     @IBAction func onDoneButton(sender: AnyObject) {

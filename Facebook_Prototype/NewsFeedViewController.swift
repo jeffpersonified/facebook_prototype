@@ -13,7 +13,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerAnimatedTransiti
     // Set local outlets and variables
     @IBOutlet weak var newsFeedScrollView: UIScrollView!
     @IBOutlet weak var newsFeedImageView: UIImageView!
-    var animationDuration = 0.3
+    var animationDuration = 0.2
     var isPresenting: Bool = true
     var onTapPhoto: UIImageView!
     
@@ -30,6 +30,12 @@ class NewsFeedViewController: UIViewController, UIViewControllerAnimatedTransiti
         var destinationViewController = segue.destinationViewController as PhotoViewController
         var window = UIApplication.sharedApplication().keyWindow
         var frame = window.convertRect(onTapPhoto.frame, fromView: self.newsFeedScrollView)
+        var imagewidthDimension = self.onTapPhoto.image?.size.width
+        var imageHeightDimension = self.onTapPhoto.image?.size.height
+        var clonedPhoto = UIImageView(image: self.onTapPhoto.image)
+        var originalHeight = clonedPhoto.image?.size.height
+        var originalWidth = clonedPhoto.image?.size.width
+        var transitionedHeight = originalHeight! / originalWidth! * 320
         
         destinationViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
         
@@ -38,19 +44,22 @@ class NewsFeedViewController: UIViewController, UIViewControllerAnimatedTransiti
         destinationViewController.photo = self.onTapPhoto.image
         
         // Create a copy of the tapped photo and add to Window
-        var clonedPhoto = UIImageView(image: self.onTapPhoto.image)
         clonedPhoto.frame = frame
         clonedPhoto.contentMode = UIViewContentMode.ScaleAspectFill
         clonedPhoto.clipsToBounds = true
         window.addSubview(clonedPhoto)
-        
+
         UIView.animateWithDuration(animationDuration, animations: { () -> Void in
-            var dynamicPhotoHeight = (clonedPhoto.frame.height / clonedPhoto.frame.width) * 320
-            clonedPhoto.frame = CGRect(x: 0, y: 44, width: 320, height: dynamicPhotoHeight)
+            
+            clonedPhoto.frame = CGRect(x: 0, y: 44, width: 320, height: transitionedHeight)
             clonedPhoto.center = window.center
 
             }) { (finished: Bool) -> Void in
-                clonedPhoto.removeFromSuperview()
+                UIView.animateWithDuration(0.2, animations: { () -> Void in
+                        clonedPhoto.alpha = 0
+                    }, completion: { (finished: Bool) -> Void in
+                        clonedPhoto.removeFromSuperview()
+                })
         }
 
     }
@@ -84,16 +93,23 @@ class NewsFeedViewController: UIViewController, UIViewControllerAnimatedTransiti
             containerView.addSubview(toViewController.view)
             toViewController.view.alpha = 0
             
-            UIView.animateWithDuration(animationDuration, animations: { () -> Void in
-                toViewController.view.alpha = 1
+            UIView.animateWithDuration(animationDuration * 1.5, animations: { () -> Void in
+                    toViewController.view.alpha = 1
                 }, completion: { (finished: Bool) -> Void in
-
+                    transitionContext.completeTransition(true)
             })
-            println("presenting")
+
 
         } else {
-            println("not presenting")
+            containerView.addSubview(fromViewController.view)
+            
             toViewController.removeFromParentViewController()
+            UIView.animateWithDuration(animationDuration, animations: { () -> Void in
+                    fromViewController.view.alpha = 0
+                }, completion: { (finished: Bool) -> Void in
+                    fromViewController.removeFromParentViewController()
+                    transitionContext.completeTransition(true)
+            })
         }
     }
 
