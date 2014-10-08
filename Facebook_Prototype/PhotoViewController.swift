@@ -9,10 +9,19 @@
 import UIKit
 
 class PhotoViewController: UIViewController {
+    
+    @IBOutlet weak var photoImageView: UIImageView!
+    var photo: UIImage!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        photoImageView.image = photo
+    
+    }
+ 
+    @IBAction func onDoneButton(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 
 }

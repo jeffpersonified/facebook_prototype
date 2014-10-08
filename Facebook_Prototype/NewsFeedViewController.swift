@@ -13,6 +13,8 @@ class NewsFeedViewController: UIViewController {
     // Set local outlets and variables
     @IBOutlet weak var newsFeedScrollView: UIScrollView!
     @IBOutlet weak var newsFeedImageView: UIImageView!
+
+    var onTapPhoto: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +25,16 @@ class NewsFeedViewController: UIViewController {
 
     }
     
-    @IBAction func onPhotoGestureRecognizer(sender: UITapGestureRecognizer) {
-        println("yo")
+    override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!) {
+        var destinationViewController = segue.destinationViewController as PhotoViewController
         
+        destinationViewController.photo = self.onTapPhoto.image
+
+    }
+    
+    @IBAction func onPhotoGestureRecognizer(sender: UITapGestureRecognizer) {
+        onTapPhoto = sender.view as UIImageView
+        performSegueWithIdentifier("photoViewSegue", sender: self)
     }
 
     
