@@ -14,6 +14,7 @@
 		1F6B0D2219DCFB4B00101905 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6B0D2019DCFB4B00101905 /* LaunchScreen.xib */; };
 		1F6B0D2E19DCFB4C00101905 /* Facebook_PrototypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6B0D2D19DCFB4C00101905 /* Facebook_PrototypeTests.swift */; };
 		1FB73FB519E08CB600E59F6C /* NewsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB73FB419E08CB600E59F6C /* NewsFeedViewController.swift */; };
+		1FB73FB719E4CB7D00E59F6C /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB73FB619E4CB7D00E59F6C /* PhotoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		1F6B0D2C19DCFB4C00101905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F6B0D2D19DCFB4C00101905 /* Facebook_PrototypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facebook_PrototypeTests.swift; sourceTree = "<group>"; };
 		1FB73FB419E08CB600E59F6C /* NewsFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedViewController.swift; sourceTree = "<group>"; };
+		1FB73FB619E4CB7D00E59F6C /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				1F6B0D1719DCFB4B00101905 /* AppDelegate.swift */,
 				1F6B0D1919DCFB4B00101905 /* ViewController.swift */,
 				1F6B0D1B19DCFB4B00101905 /* Main.storyboard */,
+				1FB73FB619E4CB7D00E59F6C /* PhotoViewController.swift */,
 				1FB73FB419E08CB600E59F6C /* NewsFeedViewController.swift */,
 				1F6B0D1E19DCFB4B00101905 /* Images.xcassets */,
 				1F6B0D2019DCFB4B00101905 /* LaunchScreen.xib */,
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F6B0D1A19DCFB4B00101905 /* ViewController.swift in Sources */,
+				1FB73FB719E4CB7D00E59F6C /* PhotoViewController.swift in Sources */,
 				1F6B0D1819DCFB4B00101905 /* AppDelegate.swift in Sources */,
 				1FB73FB519E08CB600E59F6C /* NewsFeedViewController.swift in Sources */,
 			);
