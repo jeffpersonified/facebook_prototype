@@ -22,8 +22,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerAnimatedTransiti
         
         view.backgroundColor = UIColor(red: 0.83, green: 0.84, blue: 0.86, alpha: 1)
         newsFeedScrollView.contentSize = newsFeedImageView.frame.size
-        
-
     }
     
     override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!) {
@@ -80,8 +78,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerAnimatedTransiti
     }
     
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
-        // The value here should be the duration of the animations scheduled in the animationTransition method
-        return 0.4
+        return animationDuration
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
@@ -99,7 +96,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerAnimatedTransiti
                     transitionContext.completeTransition(true)
             })
 
-
         } else {
             containerView.addSubview(fromViewController.view)
             
@@ -112,5 +108,4 @@ class NewsFeedViewController: UIViewController, UIViewControllerAnimatedTransiti
             })
         }
     }
-
 }
