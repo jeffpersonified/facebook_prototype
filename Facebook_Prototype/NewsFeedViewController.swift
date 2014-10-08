@@ -13,7 +13,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerAnimatedTransiti
     // Set local outlets and variables
     @IBOutlet weak var newsFeedScrollView: UIScrollView!
     @IBOutlet weak var newsFeedImageView: UIImageView!
-    
+    var animationDuration = 0.3
     var isPresenting: Bool = true
     var onTapPhoto: UIImageView!
     
@@ -28,10 +28,30 @@ class NewsFeedViewController: UIViewController, UIViewControllerAnimatedTransiti
     
     override func prepareForSegue(segue: (UIStoryboardSegue!), sender: AnyObject!) {
         var destinationViewController = segue.destinationViewController as PhotoViewController
-        destinationViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
-        destinationViewController.transitioningDelegate = self
+        var window = UIApplication.sharedApplication().keyWindow
+        var frame = window.convertRect(onTapPhoto.frame, fromView: self.newsFeedScrollView)
         
+        destinationViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+        
+        // Pass image data to destination VC
+        destinationViewController.transitioningDelegate = self
         destinationViewController.photo = self.onTapPhoto.image
+        
+        // Create a copy of the tapped photo and add to Window
+        var clonedPhoto = UIImageView(image: self.onTapPhoto.image)
+        clonedPhoto.frame = frame
+        clonedPhoto.contentMode = UIViewContentMode.ScaleAspectFill
+        clonedPhoto.clipsToBounds = true
+        window.addSubview(clonedPhoto)
+        
+        UIView.animateWithDuration(animationDuration, animations: { () -> Void in
+            var dynamicPhotoHeight = (clonedPhoto.frame.height / clonedPhoto.frame.width) * 320
+            clonedPhoto.frame = CGRect(x: 0, y: 44, width: 320, height: dynamicPhotoHeight)
+            clonedPhoto.center = window.center
+
+            }) { (finished: Bool) -> Void in
+                clonedPhoto.removeFromSuperview()
+        }
 
     }
     
@@ -40,7 +60,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerAnimatedTransiti
         performSegueWithIdentifier("photoViewSegue", sender: self)
     }
 
-    
     func animationControllerForPresentedController(presented: UIViewController!, presentingController presenting: UIViewController!, sourceController source: UIViewController!) -> UIViewControllerAnimatedTransitioning! {
         isPresenting = true
         return self
@@ -57,17 +76,25 @@ class NewsFeedViewController: UIViewController, UIViewControllerAnimatedTransiti
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        println("animating transition")
         var containerView = transitionContext.containerView()
         var toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
         var fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
         
         if (isPresenting) {
+            containerView.addSubview(toViewController.view)
+            toViewController.view.alpha = 0
+            
+            UIView.animateWithDuration(animationDuration, animations: { () -> Void in
+                toViewController.view.alpha = 1
+                }, completion: { (finished: Bool) -> Void in
+
+            })
             println("presenting")
+
         } else {
             println("not presenting")
+            toViewController.removeFromParentViewController()
         }
-        // TODO: animate the transition in Step 3 below
     }
 
 }
